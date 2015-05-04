@@ -40,6 +40,34 @@ print_words() and print_top().
 import sys
 
 # +++your code here+++
+def print_words(filename):
+  words = count(filename)
+  for k,v in sorted(words):
+    print "%s %s"%(k,v)
+
+def print_top(filename):
+  words = count(filename)
+  cnt = 0
+  for k,v in sorted(words.items(), key=lambda x:x[1], reverse=True):
+    if cnt <= 20:
+      print "%s %s"%(k,v)
+      cnt += 1
+    else:
+      break
+
+def count(filename):
+  f = open(filename,"rU") 
+  wdict = {}
+  for line in f:
+    spl = line.split()
+    for word in spl:
+      word = word.lower()
+      if word not in wdict:
+        wdict[word] = 1
+      else:
+        wdict[word] +=1
+  
+  return wdict
 # Define print_words(filename) and print_top(filename) functions.
 # You could write a helper utility function that reads a file
 # and builds and returns a word/count dict for it.
